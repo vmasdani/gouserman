@@ -1,0 +1,37 @@
+version: '3.9'
+services:
+  gouserman:
+    image: gouserman
+    restart: unless-stopped
+    ports:
+      - "5430:5430"
+    volumes:
+      - type: bind
+        source: ./jwt.secret
+        target: /app/jwt.secret
+
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=masterpostgrespassword
+      - POSTGRES_HOST=172.17.0.1
+      - POSTGRES_DB=gouserman
+      - POSTGRES_PORT=5429
+      - ADMIN_MASTER_PASSWORD=gousermanadmin
+
+  postgres:
+    image: postgres:14-alpine3.17
+    restart: unless-stopped
+    ports:
+      - "5429:5432"
+    environment:
+      - POSTGRES_PASSWORD=masterpostgrespassword
+      - POSTGRES_DB=gouserman
+
+  phppgadmin:
+    image: bitnami/phppgadmin:7.13.0
+    restart: unless-stopped
+    ports:
+      - "5428:8080"
+    environment:
+      - DATABASE_HOST=172.17.0.1
+      - DATABASE_PORT_NUMBER=5429
