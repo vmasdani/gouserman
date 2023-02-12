@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option go_package=".;main";
+
+message GousermanUser{
+    optional GousermanGormModel gorm_model=1;
+    optional GousermanBaseModel base_model=2;
+    optional string name = 3;
+    optional string username =4;
+    optional string password=5;
+    optional string email=6;
+}
+message GousermanUsers{
+    repeated GousermanUser users=1;
+}
+message GousermanGormModel{
+    optional uint64 id=1;
+    optional string created_at=2;
+    optional string updated_at=3;
+    optional string deleted_at=4;
+}
+message GousermanBaseModel{
+    
+}

@@ -8,6 +8,7 @@ parser.add_argument('action')
 args = parser.parse_args()
 
 print('Generating proto Go')
+subprocess.run('./protoc -I=$PWD/protos --go_out=$PWD/backend $PWD/protos/*.proto', shell=True, cwd='.')
 print('Generating proto TS')
 
 

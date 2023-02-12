@@ -16,6 +16,8 @@ func YourHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Hello from gouserman!\n"))
 }
 
+var DB *gorm.DB
+
 func main() {
 	fmt.Println("Starting...")
 	time.Sleep(time.Second * 10)
@@ -39,6 +41,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	DB = db
 
 	db.AutoMigrate(&User{})
 
